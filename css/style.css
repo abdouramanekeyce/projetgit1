@@ -718,3 +718,19 @@ footer {
   background-clip: text;
 }
 
+
+/* MODIFICATION 3 : Animation pour le titre */
+.pulse-animation {
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.95;
+  }
+}
