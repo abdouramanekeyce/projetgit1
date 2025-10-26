@@ -27,12 +27,14 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <span class="hero-tag">Groupe1B3 - Projet Écologie</span>
-      <h1>Notre Planète Terre est en Danger</h1>
-      <p>Découvrez les enjeux environnementaux critiques et comment nous pouvons ensemble construire un avenir durable.</p>
+      <span class="hero-tag">🌍 Groupe1B3 - Projet Écologie</span>
+      <!-- MODIFICATION 1 : Changement du titre principal avec animation -->
+      <h1 class="pulse-animation">Notre Planète a Besoin de Nous</h1>
+      <!-- MODIFICATION 2 : Mise à jour du sous-titre -->
+      <p>Agissons ensemble pour préserver notre environnement et construire un avenir durable pour les générations futures.</p>
       <div class="hero-buttons">
-        <a href="pages/ocean-pollution.html" class="btn btn-primary">Explorer →</a>
-        <a href="pages/solutions.html" class="btn btn-secondary">Voir les Solutions</a>
+        <a href="pages/ocean-pollution.html" class="btn btn-primary">Explorer les Problèmes →</a>
+        <a href="pages/solutions.html" class="btn btn-secondary">Découvrir les Solutions</a>
       </div>
       <div class="scroll-indicator" style="margin-top: 3rem;">
         <div style="animation: pulse 2s infinite;">↓</div>
@@ -88,10 +90,11 @@
         <div class="stat-label">Décès Prématurés</div>
         <div class="stat-unit">dus à la pollution de l'air</div>
       </div>
+      <!-- MODIFICATION 3 : Nouvelle statistique -->
       <div class="stat-card">
-        <div class="stat-number">1M</div>
-        <div class="stat-label">Espèces en Danger</div>
-        <div class="stat-unit">menacées d'extinction</div>
+        <div class="stat-number">2.1B</div>
+        <div class="stat-label">Tonnes de Déchets</div>
+        <div class="stat-unit">produits annuellement</div>
       </div>
       <div class="stat-card">
         <div class="stat-number">10B</div>
@@ -110,6 +113,10 @@
           <div class="card-icon">🌊</div>
           <h3>Pollution des Océans</h3>
           <p>Les océans accumulent des millions de tonnes de plastique chaque année, menaçant la vie marine et les écosystèmes.</p>
+          <!-- MODIFICATION 4 : Ajout d'un indicateur -->
+          <div style="margin-top: 1rem; padding: 0.5rem; background: rgba(6, 182, 212, 0.1); border-radius: 6px; font-size: 0.9rem;">
+            🌊 8M tonnes de plastique/an
+          </div>
         </div>
       </a>
       <a href="pages/atmosphere-pollution.html" style="text-decoration: none;">
@@ -117,6 +124,9 @@
           <div class="card-icon">💨</div>
           <h3>Pollution Atmosphérique</h3>
           <p>L'air que nous respirons est contaminé par les émissions industrielles et les gaz à effet de serre.</p>
+          <div style="margin-top: 1rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px; font-size: 0.9rem;">
+            💨 7M décès prématurés/an
+          </div>
         </div>
       </a>
       <a href="pages/human-impact.html" style="text-decoration: none;">
@@ -124,16 +134,45 @@
           <div class="card-icon">👥</div>
           <h3>Impact Humain</h3>
           <p>Découvrez comment nos activités quotidiennes impactent l'équilibre écologique de la planète.</p>
+          <div style="margin-top: 1rem; padding: 0.5rem; background: rgba(168, 85, 247, 0.1); border-radius: 6px; font-size: 0.9rem;">
+            👥 1M espèces menacées
+          </div>
         </div>
       </a>
+      <!-- MODIFICATION 5 : Nouvelle carte pour les solutions -->
+      <a href="pages/solutions.html" style="text-decoration: none;">
+        <div class="card">
+          <div class="card-icon">🌱</div>
+          <h3>Solutions Durables</h3>
+          <p>Découvrez les actions concrètes que nous pouvons tous entreprendre pour protéger notre planète.</p>
+          <div style="margin-top: 1rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px; font-size: 0.9rem;">
+            🌱 18M emplois verts d'ici 2030
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- MODIFICATION 6 : Nouvelle section témoignage -->
+  <section style="background: linear-gradient(135deg, rgba(249, 158, 11, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%); border-radius: 12px; text-align: center;">
+    <h2 class="section-title">Ils Agissent Déjà</h2>
+    <div style="max-width: 600px; margin: 0 auto;">
+      <p style="font-size: 1.2rem; font-style: italic; color: var(--text-muted); margin-bottom: 2rem;">
+        "Chaque petit geste compte. En réduisant notre consommation de plastique et en privilégiant les transports durables, nous pouvons vraiment faire la différence."
+      </p>
+      <div style="font-weight: 600; color: var(--text-light);">- Communauté EcoWatch</div>
     </div>
   </section>
 
   <!-- Call to Action -->
   <section style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border-radius: 12px; text-align: center;">
     <h2 class="section-title">Ensemble pour un Avenir Durable</h2>
-    <p class="section-subtitle">Chaque action compte. Découvrez comment vous pouvez contribuer à la protection de notre planète.</p>
-    <a href="pages/solutions.html" class="btn btn-primary">Découvrir les Solutions</a>
+    <p class="section-subtitle">Chaque action compte. Rejoignez le mouvement et découvrez comment vous pouvez contribuer à la protection de notre planète.</p>
+    <!-- MODIFICATION 7 : Boutons améliorés -->
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+      <a href="pages/solutions.html" class="btn btn-primary">Commencer Maintenant</a>
+      <a href="pages/contact.html" class="btn btn-secondary">Nous Rejoindre</a>
+    </div>
   </section>
 
   <!-- Appel à l'Action Global -->
@@ -155,6 +194,13 @@
         <div class="footer-section">
           <h3>À propos</h3>
           <p>EcoWatch est un projet éducatif créé par le Groupe1B3 pour sensibiliser aux enjeux environnementaux critiques.</p>
+          <!-- MODIFICATION 8 : Ajout d'une mention sur le projet -->
+          <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(30, 41, 59, 0.5); border-radius: 8px;">
+            <strong>🌍 Projet Éducatif</strong>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: var(--text-muted);">
+              Site créé dans le cadre d'un projet étudiant pour promouvoir la conscience écologique.
+            </p>
+          </div>
         </div>
         <div class="footer-section">
           <h3>Navigation</h3>
@@ -175,6 +221,12 @@
             <li><a href="#">Rapports ONU</a></li>
             <li><a href="#">Études Scientifiques</a></li>
           </ul>
+          <!-- MODIFICATION 9 : Ajout d'un lien rapide -->
+          <div style="margin-top: 1rem;">
+            <a href="pages/solutions.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem; width: 100%; text-align: center; display: block;">
+              Voir les Solutions
+            </a>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">

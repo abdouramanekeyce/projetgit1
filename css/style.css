@@ -9,6 +9,7 @@
   --primary-color: #10b981;
   --secondary-color: #06b6d4;
   --accent-color: #f59e0b;
+  --danger-color: #ef4444;
   --dark-bg: #0f172a;
   --light-bg: #1e293b;
   --text-light: #e2e8f0;
@@ -16,6 +17,7 @@
   --border-color: rgba(16, 185, 129, 0.2);
   --gradient-primary: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
   --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
 }
 
 /* ==================== GLOBAL STYLES ==================== */
@@ -29,6 +31,7 @@ body {
   color: var(--text-light);
   line-height: 1.6;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 /* ==================== NAVIGATION ==================== */
@@ -42,6 +45,7 @@ nav {
   z-index: 1000;
   padding: 1rem 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
 .nav-container {
@@ -62,6 +66,11 @@ nav {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .nav-links {
@@ -76,6 +85,7 @@ nav {
   font-weight: 500;
   position: relative;
   transition: color 0.3s ease;
+  padding: 0.5rem 0;
 }
 
 .nav-links a::after {
@@ -112,6 +122,13 @@ nav {
   color: var(--text-light);
   font-size: 1.5rem;
   cursor: pointer;
+  transition: transform 0.3s ease;
+  padding: 0.5rem;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
+  color: var(--primary-color);
 }
 
 /* ==================== HERO SECTION ==================== */
@@ -156,6 +173,7 @@ nav {
   font-weight: 600;
   margin-bottom: 2rem;
   animation: slideInDown 0.8s ease-out;
+  backdrop-filter: blur(10px);
 }
 
 .hero h1 {
@@ -188,6 +206,10 @@ nav {
   animation: fadeIn 1s ease-out 0.6s both;
 }
 
+.scroll-indicator {
+  animation: bounce 2s infinite;
+}
+
 /* ==================== BUTTONS ==================== */
 .btn {
   padding: 1rem 2rem;
@@ -201,6 +223,7 @@ nav {
   display: inline-block;
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
 .btn-primary {
@@ -223,6 +246,13 @@ nav {
 .btn-secondary:hover {
   background: rgba(16, 185, 129, 0.1);
   transform: translateY(-2px);
+}
+
+/* MODIFICATION 1 : Style pour le bouton loading */
+.btn.loading {
+  opacity: 0.7;
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
 /* ==================== SECTIONS ==================== */
@@ -270,6 +300,7 @@ section {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .stat-card::before {
@@ -330,6 +361,7 @@ section {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .card::before {
@@ -358,6 +390,11 @@ section {
 .card-icon {
   font-size: 3rem;
   margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-icon {
+  transform: scale(1.1);
 }
 
 .card h3 {
@@ -369,6 +406,18 @@ section {
 .card p {
   color: var(--text-muted);
   line-height: 1.8;
+}
+
+/* MODIFICATION 2 : Style pour les indicateurs dans les cartes */
+.card-indicator {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  text-align: center;
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 /* ==================== IMAGE SECTIONS ==================== */
@@ -422,6 +471,11 @@ section {
   padding-left: 2rem;
   position: relative;
   color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.image-content li:hover {
+  color: var(--text-light);
 }
 
 .image-content li::before {
@@ -431,6 +485,99 @@ section {
   color: var(--primary-color);
   font-weight: bold;
   font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.image-content li:hover::before {
+  transform: scale(1.2);
+}
+
+/* ==================== FORM STYLES ==================== */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-light);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* MODIFICATION 3 : Styles pour les messages d'erreur et succès */
+.error-message {
+  color: var(--danger-color);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.success-message {
+  background: var(--gradient-success);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  text-align: center;
+  animation: slideInUp 0.5s ease-out;
+}
+
+/* ==================== FAQ STYLES ==================== */
+.faq-item {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.faq-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.faq-item h3 {
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-light);
+}
+
+.faq-answer {
+  color: var(--text-muted);
+  margin-top: 1rem;
+  display: none;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.faq-item span {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
 }
 
 /* ==================== FOOTER ==================== */
@@ -473,6 +620,7 @@ footer {
 
 .footer-section a:hover {
   color: var(--primary-color);
+  transform: translateX(5px);
 }
 
 .footer-bottom {
@@ -513,6 +661,30 @@ footer {
   background: var(--gradient-primary);
   color: white;
   transform: translateY(-3px);
+}
+
+/* ==================== SCROLL TO TOP BUTTON ==================== */
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+  z-index: 999;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  transition: all 0.3s ease;
+}
+
+.scroll-to-top:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
 }
 
 /* ==================== ANIMATIONS ==================== */
@@ -569,12 +741,35 @@ footer {
   }
 }
 
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
   }
   50% {
     transform: translateY(-20px);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
   }
 }
 
@@ -596,19 +791,36 @@ footer {
   }
 }
 
+/* MODIFICATION 4 : Animation pour le titre */
+.pulse-animation {
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.95;
+  }
+}
+
 /* ==================== RESPONSIVE DESIGN ==================== */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
     position: absolute;
-    top: 70px;
+    top: 100%;
     left: 0;
     right: 0;
-    background: rgba(15, 23, 42, 0.95);
+    background: rgba(15, 23, 42, 0.98);
     flex-direction: column;
     gap: 0;
     padding: 1rem;
     border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(20px);
   }
 
   .nav-links.active {
@@ -618,6 +830,11 @@ footer {
   .nav-links a {
     padding: 1rem;
     border-bottom: 1px solid var(--border-color);
+    text-align: center;
+  }
+
+  .nav-links a:last-child {
+    border-bottom: none;
   }
 
   .menu-toggle {
@@ -668,6 +885,15 @@ footer {
   section {
     padding: 3rem 1rem;
   }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
@@ -689,6 +915,18 @@ footer {
 
   .stat-number {
     font-size: 2rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    padding: 1rem;
   }
 }
 
@@ -718,3 +956,52 @@ footer {
   background-clip: text;
 }
 
+/* MODIFICATION 5 : Styles pour les images lazy loading */
+img.lazy {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+img.loaded {
+  opacity: 1;
+}
+
+/* MODIFICATION 6 : Amélioration de l'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* MODIFICATION 7 : Styles pour le focus visible */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* MODIFICATION 8 : Styles d'impression */
+@media print {
+  .hero-buttons,
+  .scroll-to-top,
+  .menu-toggle,
+  .social-links {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .gradient-text {
+    background: none !important;
+    -webkit-text-fill-color: black !important;
+    color: black !important;
+  }
+}

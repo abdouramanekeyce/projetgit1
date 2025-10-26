@@ -40,22 +40,26 @@
       <div class="card">
         <div class="card-icon">📍</div>
         <h3>Adresse</h3>
-        <p>Groupe1B3<br>École/Université<br>Ville, Pays</p>
+        <!-- MODIFICATION 1 : Adresse plus détaillée -->
+        <p>Groupe1B3 ÉcoWatch<br>123 Avenue de l'Environnement<br>75000 Paris, France</p>
       </div>
       <div class="card">
         <div class="card-icon">📞</div>
         <h3>Téléphone</h3>
-        <p>+33 (0) 1 23 45 67 89<br>Lun-Ven: 9h-17h<br>Heure locale</p>
+        <!-- MODIFICATION 2 : Horaires étendus -->
+        <p>+33 (0) 1 23 45 67 89<br>Lun-Ven: 9h-18h<br>Samedi: 10h-16h</p>
       </div>
       <div class="card">
         <div class="card-icon">📧</div>
         <h3>Email</h3>
-        <p>contact@ecowatch.fr<br>info@groupe1b3.fr<br>Réponse sous 24h</p>
+        <!-- MODIFICATION 3 : Emails plus spécifiques -->
+        <p>contact@ecowatch-g1b3.fr<br>info@ecowatch-g1b3.fr<br>Réponse sous 24h</p>
       </div>
       <div class="card">
         <div class="card-icon">🌐</div>
         <h3>Réseaux Sociaux</h3>
-        <p>Facebook: @EcoWatch<br>Twitter: @EcoWatchFR<br>Instagram: @EcoWatch_Groupe1B3</p>
+        <!-- MODIFICATION 4 : Noms de comptes cohérents -->
+        <p>@EcoWatchG1B3<br>Sur toutes les plateformes<br>Messages directs ouverts</p>
       </div>
     </div>
   </section>
@@ -64,21 +68,22 @@
   <section style="background: rgba(30, 41, 59, 0.3);">
     <h2 class="section-title">Formulaire de Contact</h2>
     <div style="max-width: 600px; margin: 0 auto;">
-      <form class="contact-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <!-- MODIFICATION 5 : Ajout d'ID pour le formulaire et gestion de soumission -->
+      <form id="contactForm" class="contact-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
         <div>
-          <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Nom Complet</label>
+          <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Nom Complet *</label>
           <input 
             type="text" 
             id="name" 
             name="name" 
-            placeholder="Votre nom"
+            placeholder="Votre nom complet"
             style="width: 100%; padding: 0.75rem; background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-light); font-size: 1rem; transition: all 0.3s ease;"
             required
           >
         </div>
 
         <div>
-          <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email</label>
+          <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email *</label>
           <input 
             type="email" 
             id="email" 
@@ -101,7 +106,7 @@
         </div>
 
         <div>
-          <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Sujet</label>
+          <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Sujet *</label>
           <select 
             id="subject" 
             name="subject"
@@ -109,19 +114,21 @@
             required
           >
             <option value="">Sélectionnez un sujet</option>
-            <option value="question">Question</option>
-            <option value="suggestion">Suggestion</option>
-            <option value="collaboration">Collaboration</option>
+            <option value="question">Question générale</option>
+            <option value="suggestion">Suggestion d'amélioration</option>
+            <option value="collaboration">Proposition de collaboration</option>
+            <option value="partenariat">Demande de partenariat</option>
+            <option value="bug">Signaler un problème technique</option>
             <option value="autre">Autre</option>
           </select>
         </div>
 
         <div>
-          <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Message</label>
+          <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Message *</label>
           <textarea 
             id="message" 
             name="message" 
-            placeholder="Votre message..."
+            placeholder="Décrivez-nous votre demande en détail..."
             rows="6"
             style="width: 100%; padding: 0.75rem; background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-light); font-size: 1rem; font-family: inherit; resize: vertical; transition: all 0.3s ease;"
             required
@@ -137,8 +144,25 @@
             required
           >
           <label for="consent" style="margin: 0; cursor: pointer;">
-            J'accepte que mes données soient utilisées pour vous répondre
+            J'accepte que mes données soient utilisées pour vous répondre *
           </label>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <input 
+            type="checkbox" 
+            id="newsletter" 
+            name="newsletter"
+            style="width: 20px; height: 20px; cursor: pointer;"
+          >
+          <label for="newsletter" style="margin: 0; cursor: pointer;">
+            Je souhaite recevoir la newsletter EcoWatch (optionnel)
+          </label>
+        </div>
+
+        <!-- MODIFICATION 6 : Ajout d'un message de confirmation -->
+        <div id="formMessage" style="display: none; padding: 1rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%); border-radius: 8px; text-align: center;">
+          <p style="margin: 0; color: #10b981; font-weight: 600;">✅ Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.</p>
         </div>
 
         <button 
@@ -220,13 +244,14 @@
         </div>
       </div>
 
+      <!-- MODIFICATION 7 : Ajout d'une nouvelle FAQ -->
       <div style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border-radius: 8px; cursor: pointer;" onclick="this.querySelector('.faq-answer').style.display = this.querySelector('.faq-answer').style.display === 'none' ? 'block' : 'none'">
         <h3 style="margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
-          Où puis-je trouver plus d'informations ?
+          Quel est le délai de réponse ?
           <span style="font-size: 1.5rem;">▼</span>
         </h3>
         <div class="faq-answer" style="color: var(--text-muted); margin-top: 1rem; display: none;">
-          Consultez nos pages détaillées sur la pollution des océans, de l'atmosphère, l'impact humain et les solutions. Vous pouvez également nous contacter directement.
+          Nous nous engageons à répondre à tous les messages dans un délai de 24 à 48 heures. Pour les urgences, privilégiez l'appel téléphonique.
         </div>
       </div>
 
@@ -358,5 +383,22 @@
   <button class="scroll-to-top" style="position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%); border: none; border-radius: 50%; color: white; font-size: 1.5rem; cursor: pointer; display: none; z-index: 999; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); transition: all 0.3s ease;">↑</button>
 
   <script src="../js/script.js"></script>
+  
+  <!-- MODIFICATION 8 : Ajout du script pour la gestion du formulaire -->
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Afficher le message de confirmation
+      const messageDiv = document.getElementById('formMessage');
+      messageDiv.style.display = 'block';
+      
+      // Réinitialiser le formulaire après 3 secondes
+      setTimeout(() => {
+        this.reset();
+        messageDiv.style.display = 'none';
+      }, 5000);
+    });
+  </script>
 </body>
 </html>
