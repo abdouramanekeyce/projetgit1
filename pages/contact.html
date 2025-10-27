@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Contactez-nous pour en savoir plus sur EcoWatch">
-  <title>Contact | EcoWatch - Groupe1B3</title>
+  <title>Contact |  - Groupe1B3</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -40,22 +41,25 @@
       <div class="card">
         <div class="card-icon">📍</div>
         <h3>Adresse</h3>
-        <p>Groupe1B3<br>École/Université<br>Ville, Pays</p>
+        <p>Groupe1B3<br>École/Université<br>yaounde, cameroun</p>
       </div>
       <div class="card">
         <div class="card-icon">📞</div>
         <h3>Téléphone</h3>
-        <p>+33 (0) 1 23 45 67 89<br>Lun-Ven: 9h-17h<br>Heure locale</p>
+        <!-- MODIFICATION 2 : Horaires étendus -->
+        <p>+33 (0) 1 23 45 67 89<br>Lun-Ven: 9h-18h<br>Samedi: 10h-16h</p>
       </div>
       <div class="card">
         <div class="card-icon">📧</div>
         <h3>Email</h3>
-        <p>contact@ecowatch.fr<br>info@groupe1b3.fr<br>Réponse sous 24h</p>
+        <!-- MODIFICATION 3 : Emails plus spécifiques -->
+        <p>contact@ecowatch-g1b3.fr<br>info@ecowatch-g1b3.fr<br>Réponse sous 24h</p>
       </div>
       <div class="card">
         <div class="card-icon">🌐</div>
         <h3>Réseaux Sociaux</h3>
-        <p>Facebook: @EcoWatch<br>Twitter: @EcoWatchFR<br>Instagram: @EcoWatch_Groupe1B3</p>
+        <!-- MODIFICATION 4 : Noms de comptes cohérents -->
+        <p>@EcoWatchG1B3<br>Sur toutes les plateformes<br>Messages directs ouverts</p>
       </div>
     </div>
   </section>
@@ -64,21 +68,23 @@
   <section style="background: rgba(30, 41, 59, 0.3);">
     <h2 class="section-title">Formulaire de Contact</h2>
     <div style="max-width: 600px; margin: 0 auto;">
-      <form class="contact-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <!-- MODIFICATION 5 : Ajout d'ID pour le formulaire et gestion de soumission -->
+      <form id="contactForm" class="contact-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
         <div>
-          <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Nom Complet</label>
+          <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Nom Complet *</label>
           <input 
             type="text" 
             id="name" 
             name="name" 
-            placeholder="Votre nom"
+            placeholder="Votre nom complet"
+</div>
             style="width: 100%; padding: 0.75rem; background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-light); font-size: 1rem; transition: all 0.3s ease;"
             required
-          >
+          ><!-- modif commit 3 (Honore) -->
         </div>
 
         <div>
-          <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email</label>
+          <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email *</label>
           <input 
             type="email" 
             id="email" 
@@ -101,7 +107,7 @@
         </div>
 
         <div>
-          <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Sujet</label>
+          <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Sujet *</label>
           <select 
             id="subject" 
             name="subject"
@@ -109,19 +115,21 @@
             required
           >
             <option value="">Sélectionnez un sujet</option>
-            <option value="question">Question</option>
-            <option value="suggestion">Suggestion</option>
-            <option value="collaboration">Collaboration</option>
+            <option value="question">Question générale</option>
+            <option value="suggestion">Suggestion d'amélioration</option>
+            <option value="collaboration">Proposition de collaboration</option>
+            <option value="partenariat">Demande de partenariat</option>
+            <option value="bug">Signaler un problème technique</option>
             <option value="autre">Autre</option>
           </select>
         </div>
 
         <div>
-          <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Message</label>
+          <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Message *</label>
           <textarea 
             id="message" 
             name="message" 
-            placeholder="Votre message..."
+            placeholder="Décrivez-nous votre demande en détail..."
             rows="6"
             style="width: 100%; padding: 0.75rem; background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-light); font-size: 1rem; font-family: inherit; resize: vertical; transition: all 0.3s ease;"
             required
@@ -137,8 +145,25 @@
             required
           >
           <label for="consent" style="margin: 0; cursor: pointer;">
-            J'accepte que mes données soient utilisées pour vous répondre
+            J'accepte que mes données soient utilisées pour vous répondre *
           </label>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <input 
+            type="checkbox" 
+            id="newsletter" 
+            name="newsletter"
+            style="width: 20px; height: 20px; cursor: pointer;"
+          >
+          <label for="newsletter" style="margin: 0; cursor: pointer;">
+            Je souhaite recevoir la newsletter EcoWatch (optionnel)
+          </label>
+        </div>
+
+        <!-- MODIFICATION 6 : Ajout d'un message de confirmation -->
+        <div id="formMessage" style="display: none; padding: 1rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%); border-radius: 8px; text-align: center;">
+          <p style="margin: 0; color: #10b981; font-weight: 600;">✅ Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.</p>
         </div>
 
         <button 
@@ -152,8 +177,52 @@
     </div>
   </section>
 
-  <!-- FAQ Section -->
+  <!-- Citations d'Experts -->
   <section>
+    <h2 class="section-title">Citations d'Experts</h2>
+    <p class="section-subtitle">Ce que disent les plus grands activistes sur l'engagement communautaire.</p>
+    
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div style="margin-bottom: 2.5rem; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%); border-left: 5px solid #3b82f6; border-radius: 8px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);">
+        <p style="font-size: 1.1rem; font-style: italic; color: var(--text-light); margin-bottom: 1rem; line-height: 1.8;">
+          "Chaque personne peut faire une différence. Ensemble, nous pouvons changer le monde. L'espoir vient de l'action."
+        </p>
+        <p style="color: var(--primary-color); font-weight: 600; font-size: 1rem;">
+          — Jane Goodall, Primatologue et Conservatrice
+        </p>
+      </div>
+
+      <div style="margin-bottom: 2.5rem; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%); border-left: 5px solid #3b82f6; border-radius: 8px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);">
+        <p style="font-size: 1.1rem; font-style: italic; color: var(--text-light); margin-bottom: 1rem; line-height: 1.8;">
+          "L'engagement communautaire est la clé du changement environnemental. Quand les gens se rassemblent, ils peuvent accomplir l'impossible."
+        </p>
+        <p style="color: var(--primary-color); font-weight: 600; font-size: 1rem;">
+          — Wangari Maathai, Militante Environnementale et Prix Nobel de la Paix
+        </p>
+      </div>
+
+      <div style="margin-bottom: 2.5rem; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%); border-left: 5px solid #3b82f6; border-radius: 8px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);">
+        <p style="font-size: 1.1rem; font-style: italic; color: var(--text-light); margin-bottom: 1rem; line-height: 1.8;">
+          "La justice environnementale commence par l'éducation. Quand les gens comprennent les enjeux, ils agissent."
+        </p>
+        <p style="color: var(--primary-color); font-weight: 600; font-size: 1rem;">
+          — Erin Brockovich, Avocate de la Justice Environnementale
+        </p>
+      </div>
+
+      <div style="padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%); border-left: 5px solid #3b82f6; border-radius: 8px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);">
+        <p style="font-size: 1.1rem; font-style: italic; color: var(--text-light); margin-bottom: 1rem; line-height: 1.8;">
+          "Le mouvement écologique est plus puissant que jamais. Des millions de personnes se lèvent pour protéger notre planète. Rejoignez-nous."
+        </p>
+        <p style="color: var(--primary-color); font-weight: 600; font-size: 1rem;">
+          — Paul Hawken, Auteur et Entrepreneur Écologique
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section style="background: rgba(30, 41, 59, 0.3);">
     <h2 class="section-title">Questions Fréquemment Posées</h2>
     <div style="max-width: 800px; margin: 0 auto;">
       <div style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border-radius: 8px; cursor: pointer;" onclick="this.querySelector('.faq-answer').style.display = this.querySelector('.faq-answer').style.display === 'none' ? 'block' : 'none'">
@@ -176,13 +245,14 @@
         </div>
       </div>
 
+      <!-- MODIFICATION 7 : Ajout d'une nouvelle FAQ -->
       <div style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border-radius: 8px; cursor: pointer;" onclick="this.querySelector('.faq-answer').style.display = this.querySelector('.faq-answer').style.display === 'none' ? 'block' : 'none'">
         <h3 style="margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
-          Où puis-je trouver plus d'informations ?
+          Quel est le délai de réponse ?
           <span style="font-size: 1.5rem;">▼</span>
         </h3>
         <div class="faq-answer" style="color: var(--text-muted); margin-top: 1rem; display: none;">
-          Consultez nos pages détaillées sur la pollution des océans, de l'atmosphère, l'impact humain et les solutions. Vous pouvez également nous contacter directement.
+          Nous nous engageons à répondre à tous les messages dans un délai de 24 à 48 heures. Pour les urgences, privilégiez l'appel téléphonique.
         </div>
       </div>
 
@@ -196,7 +266,7 @@
         </div>
       </div>
 
-      <div style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border-radius: 8px; cursor: pointer;" onclick="this.querySelector('.faq-answer').style.display = this.querySelector('.faq-answer').style.display === 'none' ? 'block' : 'none'">
+      <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border-radius: 8px; cursor: pointer;" onclick="this.querySelector('.faq-answer').style.display = this.querySelector('.faq-answer').style.display === 'none' ? 'block' : 'none'">
         <h3 style="margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
           Qui est responsable de ce site ?
           <span style="font-size: 1.5rem;">▼</span>
@@ -208,8 +278,58 @@
     </div>
   </section>
 
+  <!-- Appel à l'Action Spécifique -->
+  <section style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%); border-radius: 12px; text-align: center; padding: 3rem 2rem;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-light);">🤝 Je Veux Collaborer avec EcoWatch</h2>
+    <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Que vous soyez un étudiant passionné, une organisation environnementale ou une entreprise engagée, nous aimerions collaborer avec vous pour amplifier notre impact.
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="contact.html" class="btn btn-primary">Nous Rejoindre</a>
+      <a href="solutions.html" class="btn btn-secondary">Découvrir les Solutions</a>
+    </div>
+  </section>
+
+  <!-- Ressources Section -->
+  <section>
+    <h2 class="section-title">Ressources & Liens Utiles</h2>
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        <div style="padding: 2rem; background: rgba(30, 41, 59, 0.3); border-radius: 8px;">
+          <h3 style="color: var(--primary-color); margin-bottom: 1rem;">📚 Documentaires Recommandés</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.5rem;">🎬 The True Cost (Documentaire)</li>
+            <li style="margin-bottom: 0.5rem;">🎬 Chasing Coral (Netflix)</li>
+            <li style="margin-bottom: 0.5rem;">🎬 Our Planet (Netflix)</li>
+            <li style="margin-bottom: 0.5rem;">🎬 A Life on Our Planet (David Attenborough)</li>
+          </ul>
+        </div>
+
+        <div style="padding: 2rem; background: rgba(30, 41, 59, 0.3); border-radius: 8px;">
+          <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🌐 Sites Web Utiles</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.5rem;">🔗 <a href="#" style="color: #06b6d4; text-decoration: none;">Greenpeace International</a></li>
+            <li style="margin-bottom: 0.5rem;">🔗 <a href="#" style="color: #06b6d4; text-decoration: none;">Amnesty International</a></li>
+            <li style="margin-bottom: 0.5rem;">🔗 <a href="#" style="color: #06b6d4; text-decoration: none;">WWF - Fonds Mondial</a></li>
+            <li style="margin-bottom: 0.5rem;">🔗 <a href="#" style="color: #06b6d4; text-decoration: none;">Climate Action Network</a></li>
+          </ul>
+        </div>
+
+        <div style="padding: 2rem; background: rgba(30, 41, 59, 0.3); border-radius: 8px;">
+          <h3 style="color: var(--primary-color); margin-bottom: 1rem;">📖 Livres à Lire</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.5rem;">📕 The Sixth Extinction (Elizabeth Kolbert)</li>
+            <li style="margin-bottom: 0.5rem;">📕 Silent Spring (Rachel Carson)</li>
+            <li style="margin-bottom: 0.5rem;">📕 Drawdown (Paul Hawken)</li>
+            <li style="margin-bottom: 0.5rem;">📕 Regeneration (Paul Hawken)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Call to Action -->
-  <section style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border-radius: 12px; text-align: center;">
+  <section style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border-radius: 12px; text-align: center;">
     <h2 class="section-title">Rejoignez le Mouvement</h2>
     <p class="section-subtitle">Ensemble, nous pouvons créer un impact positif sur notre planète. Commencez votre voyage écologique aujourd'hui.</p>
     <a href="solutions.html" class="btn btn-primary">Découvrir les Solutions</a>
@@ -264,6 +384,196 @@
   <button class="scroll-to-top" style="position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%); border: none; border-radius: 50%; color: white; font-size: 1.5rem; cursor: pointer; display: none; z-index: 999; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); transition: all 0.3s ease;">↑</button>
 
   <script src="../js/script.js"></script>
+  
+  <!-- MODIFICATION 8 : Ajout du script pour la gestion du formulaire -->
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Afficher le message de confirmation
+      const messageDiv = document.getElementById('formMessage');
+      messageDiv.style.display = 'block';
+      
+      // Réinitialiser le formulaire après 3 secondes
+      setTimeout(() => {
+        this.reset();
+        messageDiv.style.display = 'none';
+      }, 5000);
+    });
+  </script>
 </body>
 </html>
-
+<div class="from-head">
+</div>
+<div class="from-branch">
+</div>
+<div class="from-branch">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contactez-nous pour en savoir plus sur EcoWatch">
+<title>Contact | EcoWatch - Groupe1B3</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav>
+<div class="nav-container">
+<div class="logo">🌍 EcoWatch</div>
+<ul class="nav-links">
+<li><a href="../index.html">Accueil</a></li>
+<li><a href="ocean-pollution.html">Pollution Océans</a></li>
+<li><a href="atmosphere-pollution.html">Pollution Atmosphère</a></li>
+<li><a href="human-impact.html">Impact Humain</a></li>
+<li><a href="solutions.html">Solutions</a></li>
+<li><a href="contact.html" class="active">Contact</a></li>
+</ul>
+<button class="menu-toggle">☰</button>
+</div>
+</nav>
+<section class="hero" style="background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(6,182,212,0.1) 100%);">
+<div class="hero-content">
+<span class="hero-tag">📧 Nous Contacter</span>
+<h1>Ensemble pour la Planète</h1>
+<p>Avez-vous des questions, des suggestions ou souhaitez-vous collaborer ? Nous serions ravis de vous entendre.</p>
+</div>
+</section>
+<section>
+<h2 class="section-title">Informations de Contact</h2>
+<div class="cards-grid">
+<div class="card">
+<div class="card-icon">📍</div>
+<h3>Adresse</h3>
+<p>Groupe1B3<br>École/Université<br>Ville, Pays</p>
+</div>
+<div class="card">
+<div class="card-icon">📞</div>
+<h3>Téléphone</h3>
+<p>+33 (0) 1 23 45 67 89<br>Lun-Ven: 9h-17h<br>Heure locale</p>
+</div>
+<div class="card">
+<div class="card-icon">📧</div>
+<h3>Email</h3>
+<p>contact@ecowatch.fr<br>info@groupe1b3.fr<br>Réponse assurée sous 24 heures</p>
+</div>
+<div class="card">
+<div class="card-icon">🌐</div>
+<h3>Réseaux Sociaux</h3>
+<p>Facebook: @EcoWatch<br>Twitter: @EcoWatchFR<br>Instagram: @EcoWatch_Groupe1B3</p>
+</div>
+</div>
+</section>
+<section style="background: rgba(30,41,59,0.3);">
+<h2 class="section-title">Formulaire de Contact</h2>
+<div style="max-width:600px;margin:0 auto;">
+<form class="contact-form" style="display:flex;flex-direction:column;gap:1.5rem;">
+<div>
+<label for="name" style="display:block;margin-bottom:0.5rem;font-weight:600;">Nom Complet</label>
+<input type="text" id="name" name="name" placeholder="Votre nom" style="width:100%;padding:0.75rem;background:rgba(15,23,42,0.5);border:1px solid var(--border-color);border-radius:8px;color:var(--text-light);font-size:1rem;transition:all 0.3s ease;" required>
+</div>
+<div>
+<label for="email" style="display:block;margin-bottom:0.5rem;font-weight:600;">Email</label>
+<input type="email" id="email" name="email" placeholder="votre.email@exemple.com" style="width:100%;padding:0.75rem;background:rgba(15,23,42,0.5);border:1px solid var(--border-color);border-radius:8px;color:var(--text-light);font-size:1rem;transition:all 0.3s ease;" required>
+</div>
+<div>
+<label for="phone" style="display:block;margin-bottom:0.5rem;font-weight:600;">Téléphone (Optionnel)</label>
+<input type="tel" id="phone" name="phone" placeholder="+33 (0) 1 23 45 67 89" style="width:100%;padding:0.75rem;background:rgba(15,23,42,0.5);border:1px solid var(--border-color);border-radius:8px;color:var(--text-light);font-size:1rem;transition:all 0.3s ease;">
+</div>
+<div>
+<label for="subject" style="display:block;margin-bottom:0.5rem;font-weight:600;">Sujet</label>
+<select id="subject" name="subject" style="width:100%;padding:0.75rem;background:rgba(15,23,42,0.5);border:1px solid var(--border-color);border-radius:8px;color:var(--text-light);font-size:1rem;transition:all 0.3s ease;" required>
+<option value="">Sélectionnez un sujet</option>
+<option value="question">Question</option>
+<option value="suggestion">Suggestion</option>
+<option value="collaboration">Collaboration</option>
+<option value="autre">Autre</option>
+</select>
+</div>
+<div>
+<label for="message" style="display:block;margin-bottom:0.5rem;font-weight:600;">Message</label>
+<textarea id="message" name="message" placeholder="Votre message..." rows="6" style="width:100%;padding:0.75rem;background:rgba(15,23,42,0.5);border:1px solid var(--border-color);border-radius:8px;color:var(--text-light);font-size:1rem;font-family:inherit;resize:vertical;transition:all 0.3s ease;" required></textarea>
+</div>
+<div style="display:flex;align-items:center;gap:0.5rem;">
+<input type="checkbox" id="consent" name="consent" style="width:20px;height:20px;cursor:pointer;" required>
+<label for="consent" style="margin:0;cursor:pointer;">J'accepte que mes données soient utilisées pour vous répondre</label>
+</div>
+<button type="submit" class="btn btn-primary" style="width:100%;cursor:pointer;">Envoyer le Message</button>
+</form>
+</div>
+</section>
+<section>
+<h2 class="section-title">Questions Fréquemment Posées</h2>
+<div style="max-width:800px;margin:0 auto;">
+<div style="margin-bottom:2rem;padding:1.5rem;background:linear-gradient(135deg,rgba(16,185,129,0.1) 0%,rgba(6,182,212,0.1) 100%);border-radius:8px;cursor:pointer;" onclick="this.querySelector('.faq-answer').style.display=this.querySelector('.faq-answer').style.display==='none'?'block':'none'">
+<h3 style="margin-bottom:0.5rem;display:flex;justify-content:space-between;align-items:center;">Qu'est-ce qu'EcoWatch ? <span style="font-size:1.5rem;">▼</span></h3>
+<div class="faq-answer" style="color:var(--text-muted);margin-top:1rem;display:none;">EcoWatch est un projet éducatif créé par le Groupe1B3 pour sensibiliser les gens aux enjeux environnementaux critiques et aux solutions pour un avenir durable.</div>
+</div>
+<div style="margin-bottom:2rem;padding:1.5rem;background:linear-gradient(135deg,rgba(16,185,129,0.1) 0%,rgba(6,182,212,0.1) 100%);border-radius:8px;cursor:pointer;" onclick="this.querySelector('.faq-answer').style.display=this.querySelector('.faq-answer').style.display==='none'?'block':'none'">
+<h3 style="margin-bottom:0.5rem;display:flex;justify-content:space-between;align-items:center;">Comment puis-je contribuer ? <span style="font-size:1.5rem;">▼</span></h3>
+<div class="faq-answer" style="color:var(--text-muted);margin-top:1rem;display:none;">Vous pouvez contribuer en adoptant les actions individuelles listées dans notre section Solutions, en partageant nos contenus, ou en nous contactant pour des collaborations.</div>
+</div>
+<div style="margin-bottom:2rem;padding:1.5rem;background:linear-gradient(135deg,rgba(16,185,129,0.1) 0%,rgba(6,182,212,0.1) 100%);border-radius:8px;cursor:pointer;" onclick="this.querySelector('.faq-answer').style.display=this.querySelector('.faq-answer').style.display==='none'?'block':'none'">
+<h3 style="margin-bottom:0.5rem;display:flex;justify-content:space-between;align-items:center;">Où puis-je trouver plus d'informations ? <span style="font-size:1.5rem;">▼</span></h3>
+<div class="faq-answer" style="color:var(--text-muted);margin-top:1rem;display:none;">Consultez nos pages détaillées sur la pollution des océans, de l'atmosphère, l'impact humain et les solutions. Vous pouvez également nous contacter directement.</div>
+</div>
+<div style="margin-bottom:2rem;padding:1.5rem;background:linear-gradient(135deg,rgba(16,185,129,0.1) 0%,rgba(6,182,212,0.1) 100%);border-radius:8px;cursor:pointer;" onclick="this.querySelector('.faq-answer').style.display=this.querySelector('.faq-answer').style.display==='none'?'block':'none'">
+<h3 style="margin-bottom:0.5rem;display:flex;justify-content:space-between;align-items:center;">Puis-je partager le contenu d'EcoWatch ? <span style="font-size:1.5rem;">▼</span></h3>
+<div class="faq-answer" style="color:var(--text-muted);margin-top:1rem;display:none;">Oui ! Nous encourageons le partage de nos contenus pour sensibiliser le plus de gens possible. Mentionnez simplement EcoWatch et le Groupe1B3.</div>
+</div>
+<div style="margin-bottom:2rem;padding:1.5rem;background:linear-gradient(135deg,rgba(16,185,129,0.1) 0%,rgba(6,182,212,0.1) 100%);border-radius:8px;cursor:pointer;" onclick="this.querySelector('.faq-answer').style.display=this.querySelector('.faq-answer').style.display==='none'?'block':'none'">
+<h3 style="margin-bottom:0.5rem;display:flex;justify-content:space-between;align-items:center;">Qui est responsable de ce site ? <span style="font-size:1.5rem;">▼</span></h3>
+<div class="faq-answer" style="color:var(--text-muted);margin-top:1rem;display:none;">EcoWatch est un projet créé par le Groupe1B3. Nous sommes une équipe passionnée par la protection de l'environnement et l'éducation écologique.</div>
+</div>
+</div>
+</section>
+<section style="background:linear-gradient(135deg,rgba(59,130,246,0.1) 0%,rgba(6,182,212,0.1) 100%);border-radius:12px;text-align:center;">
+<h2 class="section-title">Rejoignez le Mouvement</h2>
+<p class="section-subtitle">Ensemble, nous pouvons créer un impact positif sur notre planète. Commencez votre voyage écologique aujourd'hui.</p>
+<a href="solutions.html" class="btn btn-primary">Découvrir les Solutions</a>
+</section>
+<section style="display:flex;justify-content:space-between;align-items:center;gap:2rem;margin-top:4rem;">
+<a href="solutions.html" class="btn btn-secondary">← Retour</a>
+<a href="../index.html" class="btn btn-primary">Accueil →</a>
+</section>
+<footer>
+<div class="footer-content">
+<div class="footer-grid">
+<div class="footer-section">
+<h3>À propos</h3>
+<p>EcoWatch est un projet éducatif créé par le Groupe1B3 pour sensibiliser aux enjeux environnementaux.</p>
+</div>
+<div class="footer-section">
+<h3>Navigation</h3>
+<ul>
+<li><a href="../index.html">Accueil</a></li>
+<li><a href="ocean-pollution.html">Pollution Océans</a></li>
+<li><a href="atmosphere-pollution.html">Pollution Atmosphère</a></li>
+<li><a href="human-impact.html">Impact Humain</a></li>
+<li><a href="solutions.html">Solutions</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Ressources</h3>
+<ul>
+<li><a href="#">Données Environnementales</a></li>
+<li><a href="#">Rapports ONU</a></li>
+<li><a href="#">Organisations Écologiques</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2024 EcoWatch - Groupe1B3. Tous droits réservés.</p>
+<p>— Ajouté par **Elie Junior** dans le cadre du devoir Git. —</p>
+<div class="social-links">
+<a href="#" title="Twitter">𝕏</a>
+<a href="#" title="Facebook">f</a>
+<a href="#" title="Instagram">📷</a>
+</div>
+</div>
+</div>
+</footer>
+<button class="scroll-to-top" style="position:fixed;bottom:30px;right:30px;width:50px;height:50px;background:linear-gradient(135deg,#10b981 0%,#06b6d4 100%);border:none;border-radius:50%;color:white;font-size:1.5rem;cursor:pointer;display:none;z-index:999;box-shadow:0 4px 15px rgba(16,185,129,0.3);transition:all 0.3s ease;">↑</button>
+<script src="../js/script.js"></script>
+</body>
+</html>
+</div>
+</div>
