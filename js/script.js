@@ -6,22 +6,35 @@ document.addEventListener('DOMContentLoaded', function() {
   if (menuToggle) {
     menuToggle.addEventListener('click', function() {
       navLinks.classList.toggle('active');
+      // MODIFICATION 1 : Animation du bouton menu
+      this.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
     });
 
     // Fermer le menu quand on clique sur un lien
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', function() {
         navLinks.classList.remove('active');
+        menuToggle.textContent = '☰';
       });
+    });
+
+    // MODIFICATION 2 : Fermer le menu en cliquant à l'extérieur
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-container') && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        menuToggle.textContent = '☰';
+      }
     });
   }
 
   // Marquer le lien actif
-  const currentPage = window.location.pathname;
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a').forEach(link => {
-    if (link.getAttribute('href') === currentPage || 
-        (currentPage === '/' && link.getAttribute('href') === 'index.html')) {
+    const linkPage = link.getAttribute('href').split('/').pop();
+    if (linkPage === currentPage) {
       link.classList.add('active');
+    } else {
+      link.classList.remove('active');
     }
   });
 });
@@ -29,46 +42,40 @@ document.addEventListener('DOMContentLoaded', function() {
 // ==================== SCROLL ANIMATIONS ==================== 
 const observerOptions = {
   threshold: 0.1,
-  rootMargin: '0px 0px -100px 0px'
+  rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver(function(entries) {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.style.animation = `fadeInUp 0.8s ease-out forwards`;
+      entry.target.style.animation = `fadeInUp 0.6s ease-out forwards`;
       observer.unobserve(entry.target);
     }
   });
 }, observerOptions);
 
 // Observer les cartes et sections
-document.querySelectorAll('.card, .stat-card, .image-section').forEach(el => {
+document.querySelectorAll('.card, .stat-card, .image-section, .footer-section').forEach(el => {
   el.style.opacity = '0';
   observer.observe(el);
-});
-
-// ==================== PARALLAX EFFECT ==================== 
-window.addEventListener('scroll', function() {
-  const scrolled = window.pageYOffset;
-  const parallaxElements = document.querySelectorAll('[data-parallax]');
-  
-  parallaxElements.forEach(el => {
-    const speed = el.getAttribute('data-parallax') || 0.5;
-    el.style.transform = `translateY(${scrolled * speed}px)`;
-  });
 });
 
 // ==================== COUNTER ANIMATION ==================== 
 function animateCounter(element, target, duration = 2000) {
   let current = 0;
   const increment = target / (duration / 16);
+  
+  // MODIFICATION 3 : Gestion des suffixes (M, B, T)
+  const suffix = element.textContent.replace(/[0-9]/g, '');
+  const numericTarget = parseFloat(element.textContent);
+  
   const timer = setInterval(() => {
     current += increment;
-    if (current >= target) {
-      element.textContent = target;
+    if (current >= numericTarget) {
+      element.textContent = target + suffix;
       clearInterval(timer);
     } else {
-      element.textContent = Math.floor(current);
+      element.textContent = Math.floor(current) + suffix;
     }
   }, 16);
 }
@@ -77,27 +84,34 @@ function animateCounter(element, target, duration = 2000) {
 const counterObserver = new IntersectionObserver(function(entries) {
   entries.forEach(entry => {
     if (entry.isIntersecting && !entry.target.dataset.animated) {
-      const number = parseInt(entry.target.textContent);
+      const text = entry.target.textContent;
+      const number = parseFloat(text);
       animateCounter(entry.target, number);
       entry.target.dataset.animated = 'true';
       counterObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.5 });
+}, { threshold: 0.3 }); // MODIFICATION 4 : Seuil réduit pour déclenchement plus tôt
 
 document.querySelectorAll('.stat-number').forEach(el => {
   counterObserver.observe(el);
 });
 
-// ==================== SMOOTH SCROLL LINKS ==================== 
+// ==================== SMOOTH SCROLL ==================== 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+    
+    const target = document.querySelector(targetId);
     if (target) {
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+      // MODIFICATION 5 : Calcul de la position avec offset pour la navigation fixe
+      const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
+      
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
       });
     }
   });
@@ -109,98 +123,122 @@ if (scrollIndicator) {
   window.addEventListener('scroll', function() {
     if (window.pageYOffset > 100) {
       scrollIndicator.style.opacity = '0';
+      scrollIndicator.style.pointerEvents = 'none';
     } else {
       scrollIndicator.style.opacity = '1';
+      scrollIndicator.style.pointerEvents = 'auto';
     }
   });
 }
 
 // ==================== MOUSE MOVE EFFECT ==================== 
-document.addEventListener('mousemove', function(e) {
-  const cards = document.querySelectorAll('.card');
-  cards.forEach(card => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
-    
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  });
-});
+// MODIFICATION 6 : Effet de souris optimisé pour les performances
+let mouseMoveEnabled = true;
 
-// Reset on mouse leave
-document.addEventListener('mouseleave', function() {
-  document.querySelectorAll('.card').forEach(card => {
-    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-  });
-});
+// Vérifier les préférences de réduction des animations
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  mouseMoveEnabled = false;
+}
 
-// ==================== LAZY LOADING IMAGES ==================== 
-if ('IntersectionObserver' in window) {
-  const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        img.src = img.dataset.src;
-        img.classList.add('loaded');
-        imageObserver.unobserve(img);
-      }
+if (mouseMoveEnabled) {
+  const mouseMoveHandler = function(e) {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = (y - centerY) / 25; // MODIFICATION 7 : Effet plus subtil
+      const rotateY = (centerX - x) / 25;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
     });
-  });
+  };
 
-  document.querySelectorAll('img[data-src]').forEach(img => {
-    imageObserver.observe(img);
+  // Utiliser throttle pour les performances
+  const throttledMouseMove = throttle(mouseMoveHandler, 50);
+  document.addEventListener('mousemove', throttledMouseMove);
+
+  // Reset on mouse leave
+  document.addEventListener('mouseleave', function() {
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+    });
   });
 }
 
 // ==================== FORM HANDLING ==================== 
-const contactForm = document.querySelector('.contact-form');
+const contactForm = document.getElementById('contactForm');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Validation simple
-    const inputs = this.querySelectorAll('input, textarea');
+    // MODIFICATION 8 : Validation améliorée
+    const inputs = this.querySelectorAll('input[required], textarea[required], select[required]');
     let isValid = true;
     
     inputs.forEach(input => {
       if (!input.value.trim()) {
         input.style.borderColor = '#ef4444';
         isValid = false;
+        
+        // Ajouter un message d'erreur
+        let errorMsg = input.parentNode.querySelector('.error-message');
+        if (!errorMsg) {
+          errorMsg = document.createElement('div');
+          errorMsg.className = 'error-message';
+          errorMsg.style.cssText = `
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+          `;
+          input.parentNode.appendChild(errorMsg);
+        }
+        errorMsg.textContent = 'Ce champ est obligatoire';
       } else {
         input.style.borderColor = '';
+        const errorMsg = input.parentNode.querySelector('.error-message');
+        if (errorMsg) errorMsg.remove();
       }
     });
+
+    // Validation email
+    const emailInput = this.querySelector('input[type="email"]');
+    if (emailInput && emailInput.value) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailInput.value)) {
+        emailInput.style.borderColor = '#ef4444';
+        isValid = false;
+      }
+    }
     
     if (isValid) {
-      // Afficher un message de succès
-      const successMsg = document.createElement('div');
-      successMsg.className = 'success-message';
-      successMsg.textContent = 'Merci ! Votre message a été envoyé avec succès.';
-      successMsg.style.cssText = `
-        background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-        color: white;
-        padding: 1rem;
-        border-radius: 8px;
-        margin-top: 1rem;
-        text-align: center;
-        animation: slideInUp 0.5s ease-out;
-      `;
-      this.appendChild(successMsg);
-      
-      // Réinitialiser le formulaire
-      this.reset();
-      
-      // Supprimer le message après 3 secondes
-      setTimeout(() => {
-        successMsg.remove();
-      }, 3000);
+      // Afficher le message de succès existant
+      const successMsg = document.getElementById('formMessage');
+      if (successMsg) {
+        successMsg.style.display = 'block';
+        
+        // Réinitialiser le formulaire
+        this.reset();
+        
+        // MODIFICATION 9 : Masquer le message après 5 secondes
+        setTimeout(() => {
+          successMsg.style.display = 'none';
+        }, 5000);
+      }
     }
+  });
+
+  // MODIFICATION 10 : Effacer les erreurs en temps réel
+  contactForm.querySelectorAll('input, textarea').forEach(input => {
+    input.addEventListener('input', function() {
+      this.style.borderColor = '';
+      const errorMsg = this.parentNode.querySelector('.error-message');
+      if (errorMsg) errorMsg.remove();
+    });
   });
 }
 
@@ -210,9 +248,14 @@ if (scrollTopBtn) {
   window.addEventListener('scroll', function() {
     if (window.pageYOffset > 300) {
       scrollTopBtn.style.display = 'block';
-      scrollTopBtn.style.animation = 'fadeIn 0.3s ease-out';
+      setTimeout(() => {
+        scrollTopBtn.style.opacity = '1';
+      }, 10);
     } else {
-      scrollTopBtn.style.display = 'none';
+      scrollTopBtn.style.opacity = '0';
+      setTimeout(() => {
+        scrollTopBtn.style.display = 'none';
+      }, 300);
     }
   });
 
@@ -222,36 +265,57 @@ if (scrollTopBtn) {
       behavior: 'smooth'
     });
   });
-}
 
-// ==================== DYNAMIC BACKGROUND ==================== 
-function createFloatingElements() {
-  const container = document.querySelector('body');
-  const elementCount = 5;
+  // MODIFICATION 11 : Effet hover sur le bouton
+  scrollTopBtn.addEventListener('mouseenter', function() {
+    this.style.transform = 'scale(1.1)';
+  });
   
-  for (let i = 0; i < elementCount; i++) {
-    const float = document.createElement('div');
-    float.className = 'floating-element';
-    float.style.cssText = `
-      position: fixed;
-      width: ${Math.random() * 100 + 50}px;
-      height: ${Math.random() * 100 + 50}px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: -1;
-      top: ${Math.random() * 100}%;
-      left: ${Math.random() * 100}%;
-      animation: float ${Math.random() * 20 + 20}s infinite ease-in-out;
-    `;
-    container.appendChild(float);
-  }
+  scrollTopBtn.addEventListener('mouseleave', function() {
+    this.style.transform = 'scale(1)';
+  });
 }
 
-createFloatingElements();
+// ==================== FAQ INTERACTION ==================== 
+// MODIFICATION 12 : Fonctionnalité FAQ améliorée
+document.querySelectorAll('.faq-item, [onclick*="faq-answer"]').forEach(item => {
+  // Retirer l'ancien gestionnaire onclick
+  const originalOnClick = item.getAttribute('onclick');
+  if (originalOnClick) {
+    item.removeAttribute('onclick');
+  }
+  
+  item.addEventListener('click', function() {
+    const answer = this.querySelector('.faq-answer');
+    const arrow = this.querySelector('span');
+    
+    if (answer && arrow) {
+      const isVisible = answer.style.display === 'block';
+      
+      // Fermer toutes les autres FAQs
+      document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+        if (otherAnswer !== answer) {
+          otherAnswer.style.display = 'none';
+        }
+      });
+      
+      // Mettre à jour toutes les flèches
+      document.querySelectorAll('[onclick*="faq-answer"] span, .faq-item span').forEach(otherArrow => {
+        if (otherArrow !== arrow) {
+          otherArrow.textContent = '▼';
+        }
+      });
+      
+      // Basculer l'état actuel
+      answer.style.display = isVisible ? 'none' : 'block';
+      arrow.textContent = isVisible ? '▼' : '▲';
+      arrow.style.transform = isVisible ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+  });
+});
 
 // ==================== PERFORMANCE OPTIMIZATION ==================== 
-// Debounce function pour les événements scroll/resize
+// Debounce function
 function debounce(func, wait) {
   let timeout;
   return function executedFunction(...args) {
@@ -276,21 +340,110 @@ function throttle(func, limit) {
   };
 }
 
-// ==================== PAGE TRANSITION ==================== 
-document.querySelectorAll('a').forEach(link => {
-  if (link.getAttribute('href') && !link.getAttribute('href').startsWith('#')) {
-    link.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      if (!href.startsWith('http') && !href.startsWith('mailto')) {
-        e.preventDefault();
-        document.body.style.opacity = '0.5';
-        setTimeout(() => {
-          window.location.href = href;
-        }, 300);
+// MODIFICATION 13 : Optimisation des événements de scroll
+const optimizedScroll = debounce(function() {
+  // Code qui nécessite d'être exécuté au scroll
+}, 10);
+
+window.addEventListener('scroll', optimizedScroll);
+
+// ==================== LAZY LOADING IMAGES ==================== 
+if ('IntersectionObserver' in window) {
+  const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.classList.remove('lazy');
+        img.classList.add('loaded');
+        imageObserver.unobserve(img);
       }
     });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('img[data-src]').forEach(img => {
+    img.classList.add('lazy');
+    imageObserver.observe(img);
+  });
+}
+
+// ==================== DYNAMIC YEAR UPDATE ==================== 
+// MODIFICATION 14 : Mise à jour automatique de l'année dans le footer
+const currentYear = new Date().getFullYear();
+document.querySelectorAll('.footer-bottom p').forEach(p => {
+  if (p.textContent.includes('2024')) {
+    p.textContent = p.textContent.replace('2024', currentYear);
   }
+});
+
+// ==================== LOADING STATES ==================== 
+// MODIFICATION 15 : États de chargement pour les boutons
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    if (this.getAttribute('href') && !this.getAttribute('href').startsWith('#')) {
+      this.classList.add('loading');
+      this.innerHTML = '⏳ ' + this.textContent;
+      
+      setTimeout(() => {
+        this.classList.remove('loading');
+        this.innerHTML = this.textContent.replace('⏳ ', '');
+      }, 1500);
+    }
+  });
 });
 
 console.log('🌍 EcoWatch - Site Écologie Groupe1B3 chargé avec succès!');
 
+// MODIFICATION 16 : Ajout des animations CSS manquantes
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+    }
+  }
+  
+  .lazy {
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+  }
+  
+  .loaded {
+    opacity: 1;
+  }
+  
+  .btn.loading {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  
+  .error-message {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+`;
+document.head.appendChild(style);
